@@ -31,7 +31,7 @@
                             <addClasspath>true</addClasspath>
                             <useUniqueVersions>false</useUniqueVersions>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>Main</mainClass>
+                            <mainClass>Splatoon3Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

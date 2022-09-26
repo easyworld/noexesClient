@@ -63,7 +63,7 @@ public class Splatoon3Main {
             "  {\n" +
             "    \"update\": true,\n" +
             "    \"locked\": false,\n" +
-            "    \"addr\": \"%s\",\n" +
+            "    \"addr\": \"%x\",\n" +
             "    \"desc\": \"money1\",\n" +
             "    \"type\": \"INT\",\n" +
             "    \"value\": 4700\n" +
@@ -71,7 +71,7 @@ public class Splatoon3Main {
             "  {\n" +
             "    \"update\": true,\n" +
             "    \"locked\": false,\n" +
-            "    \"addr\": \"%s\",\n" +
+            "    \"addr\": \"%x\",\n" +
             "    \"desc\": \"money2\",\n" +
             "    \"type\": \"INT\",\n" +
             "    \"value\": 4700\n" +

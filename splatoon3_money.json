@@ -1,0 +1,18 @@
+[
+  {
+    "update": true,
+    "locked": false,
+    "addr": "376263176932",
+    "desc": "money1",
+    "type": "INT",
+    "value": 4700
+  },
+  {
+    "update": true,
+    "locked": false,
+    "addr": "376264242116",
+    "desc": "money1",
+    "type": "INT",
+    "value": 4700
+  }
+]

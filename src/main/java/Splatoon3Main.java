@@ -8,6 +8,9 @@ import misc.DebuggerHelper;
 import java.io.PrintWriter;
 import java.nio.ByteOrder;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Splatoon3Main {
 
@@ -21,20 +24,21 @@ public class Splatoon3Main {
 
         System.out.println("你输入的ip地址为：" + args[0]);
         System.out.println("开始找地址");
-        Debugger debugger = new Debugger(new SocketConnection(DebuggerHelper.buildSocket(args[0], NetworkConstants.DEFAULT_PORT, NetworkConstants.TIMEOUT)));
 
-        try {
-            Arrays.stream(debugger.getPids()).filter(pid -> TID == debugger.getTitleId(pid)).findFirst().ifPresent(debugger::attach);
+        try (Debugger debugger = new Debugger(new SocketConnection(DebuggerHelper.buildSocket(args[0], NetworkConstants.DEFAULT_PORT, NetworkConstants.TIMEOUT)))) {
+            List<Long> pids = Arrays.stream(debugger.getPids()).boxed().collect(Collectors.toList());
+            Collections.reverse(pids);
+            pids.stream().filter(pid -> TID == debugger.getTitleId(pid)).findFirst().ifPresent(debugger::attach);
             if (debugger.attached()) {
                 debugger.resume();
                 MemoryInfo[] query = debugger.query(0, 10000);
-                long heap1 = 0;
+                long heap1 = -1;
                 for (MemoryInfo memoryInfo : query) {
                     if (memoryInfo.getType() == MemoryType.HEAP && memoryInfo.getSize() == 0x14B6000) {
                         heap1 = memoryInfo.getAddress();
                     }
                 }
-                if (heap1 == 0) {
+                if (heap1 == -1) {
                     System.out.println("没找到");
                     return;
                 }
@@ -53,8 +57,6 @@ public class Splatoon3Main {
                     return;
                 }
             }
-        } finally {
-            debugger.close();
         }
         System.out.println("完事，准备用noexes导入生成的splatoon3_money.json");
     }
